@@ -1,8 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.views import LogoutView
-from .views import index, TaskList, TaskDetail, TaskCreate, TaskUpdate, TaskDelete, NewLoginView, RegisterPage
+from rest_framework.routers import DefaultRouter
+
+from .views import *
+
+app_name = 'main'
+
+router = DefaultRouter()
+router.register('tasks', APITaskViewSet)
 
 urlpatterns = [
+    path('api/tasks/<int:pk>/', api_task_detail),
+    path('api/tasks/', api_tasks),
+
+    path('api/', include(router.urls)),
+
     path('login/', NewLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
     path('register/', RegisterPage.as_view(), name='register'),

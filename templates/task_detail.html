@@ -1,1 +1,19 @@
-<h1>Task: {{ task }}</h1>
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2>Task Detail</h2>
+        </div>
+        <div class="card-body">
+            <h3>Title: {{ task.title }}</h3>
+            <p>Description: {{ task.description }}</p>
+            <p>Status: {% if task.complete %}Complete{% else %}Incomplete{% endif %}</p>
+            <p>Created: {{ task.created }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
