@@ -55,7 +55,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = ['title', 'description', 'complete']
-    success_url = reverse_lazy('task_list')
+    success_url = reverse_lazy('main:task_list')
     template_name = 'task_form.html'
 
     def form_valid(self, form):
@@ -66,13 +66,13 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = ['title', 'description', 'complete']
-    success_url = reverse_lazy('task_list')
+    success_url = reverse_lazy('main:task_list')
 
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
-    success_url = reverse_lazy('task_list')
+    success_url = reverse_lazy('main:task_list')
     template_name = 'task_confirm_delete.html'
 
 
@@ -82,14 +82,14 @@ class NewLoginView(LoginView):
     redirect_authenticated_user = False
 
     def get_success_url(self):
-        return reverse_lazy('task_list')
+        return reverse_lazy('main:task_list')
 
 
 class RegisterPage(FormView):
     template_name = 'register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('task_list')
+    success_url = reverse_lazy('main:task_list')
 
     def form_valid(self, form):
         user = form.save()
